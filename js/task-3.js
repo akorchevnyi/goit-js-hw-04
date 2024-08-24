@@ -1,7 +1,27 @@
-function getElementWidth(content, padding, border ) {
-    return parseFloat(content) + 2 * (parseFloat(padding) + parseFloat(border))
-}
+const profile = {
+    username: "Jacob",
+    playTime: 300,
 
-console.log(getElementWidth("50px", "8px", "4px")); // 74
-console.log(getElementWidth("60px", "12px", "8.5px")); // 101
-console.log(getElementWidth("200px", "0px", "0px")); // 200
+    changeUsername(newName) {
+        if (!newName || typeof newName !== "string" || newName.trim().length > 20 || !newName.trim().length) return;
+        this.username = newName.trim();
+    },
+
+    updatePlayTime(hours) {
+        if (!hours || !Number.isFinite(hours) || hours <= 0) return;
+        this.playTime += hours;
+    },
+
+    getInfo() {
+        return `${this.username} has ${this.playTime} active hours!`;
+    }
+};
+
+
+console.log(profile.getInfo()); // "Jacob has 300 active hours!"
+
+profile.changeUsername("Marco");
+console.log(profile.getInfo()); // "Marco has 300 active hours!"
+
+profile.updatePlayTime(20);
+console.log(profile.getInfo()); // "Marco has 320 active hours!"
